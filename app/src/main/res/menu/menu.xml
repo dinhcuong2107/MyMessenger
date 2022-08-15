@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_messenger"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="Tin nhắn" />
+    <item
+        android:id="@+id/menu_contacts"
+        android:icon="@drawable/ic_baseline_perm_contact_calendar_24"
+        android:title="Danh bạ" />
+    <item
+        android:id="@+id/menu_story"
+        android:icon="@drawable/ic_baseline_web_stories_24"
+        android:title="Strory" />
+</menu>
