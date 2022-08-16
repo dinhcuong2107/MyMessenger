@@ -2,6 +2,7 @@ package com.example.mymessenger.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
                 Users users_item = snapshot.getValue(Users.class);
                 Picasso.with(holder.imageView.getContext()).load(users_item.avatar).into(holder.imageView);
                 holder.textView.setText(users_item.fullname);
+                if (users_item.status.equals("online")){
+                    holder.img_stt.setBackgroundColor(Color.parseColor("#00FF0A"));
+                } else {
+                    holder.img_stt.setBackgroundColor(Color.parseColor("#000000"));
+                }
             }
 
             @Override
@@ -181,12 +187,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     }
 
     public class UsersViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imageView;
+        private ImageView imageView,img_stt;
         private TextView textView,status_friend;
 
         public UsersViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_contact_img_avt_user);
+            img_stt = itemView.findViewById(R.id.item_contact_img_stt);
             textView = itemView.findViewById(R.id.item_contact_text_name_user);
             status_friend = itemView.findViewById(R.id.item_contact_text_stt_friend);
         }

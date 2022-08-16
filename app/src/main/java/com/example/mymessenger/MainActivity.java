@@ -64,12 +64,26 @@ ViewPager viewPager;
 ProgressDialog progressDialog;
 ImageView imageView;
 TextView fullname;
+String token="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.img_avt_user);
         fullname = (TextView) findViewById(R.id.text_name_user);
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        token = task.getResult();
+                    }
+                });
 
         // nhận data từ intent
         key_user =  getIntent().getStringExtra("key_user");
@@ -116,11 +130,17 @@ TextView fullname;
                     startActivity(intent);
                     finish();
                 }
-                if (users.avatar.length() != 0)
-                {
-                    Picasso.with(MainActivity.this).load(users.avatar).into(imageView);
+                if (users.token.equals(token)){
+                    if (users.avatar.length() != 0)
+                    {
+                        Picasso.with(MainActivity.this).load(users.avatar).into(imageView);
+                    }
+                    fullname.setText(""+users.fullname);
+                }else {
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-                fullname.setText(""+users.fullname);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -247,5 +267,20 @@ TextView fullname;
 
         dialog.show();
     }
+    protected void set_status(String string){
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Users").child(key_user).child("status").setValue(string);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        set_status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        set_status("offline");
+    }
 }
