@@ -42,13 +42,14 @@ import java.util.List;
 
 
 public class MessengerAdapter extends RecyclerView.Adapter<MessengerAdapter.MessViewHolder>{
-
+    final String TAG = getClass().getSimpleName();
     List<Messenger> messengersList;
     Context context;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DatabaseReference databaseReference;
     String time_now="",key_user="",idchatzoom="";
     int TYPE_MESS;
+    MessengerAdapter.MessViewHolder saveView;
     public MessengerAdapter(Context context) {
         this.context = context;
     }
@@ -62,16 +63,17 @@ public class MessengerAdapter extends RecyclerView.Adapter<MessengerAdapter.Mess
         if (TYPE_MESS==0)
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sent, parent, false);
+            view.setTag(saveView);
             return new MessengerAdapter.MessViewHolder(view);
         }else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receive, parent, false);
+            view.setTag(saveView);
             return new MessengerAdapter.MessViewHolder(view);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull MessViewHolder holder, int position) {
-
         holder.jpg.setVisibility(View.GONE);
         holder.text_content.setVisibility(View.GONE);
         holder.l_voice.setVisibility(View.GONE);
@@ -155,6 +157,7 @@ public class MessengerAdapter extends RecyclerView.Adapter<MessengerAdapter.Mess
                 // play voice
             }
         });
+        Log.d(TAG,"stt"+position);
     }
 
     @Override
@@ -191,6 +194,7 @@ public class MessengerAdapter extends RecyclerView.Adapter<MessengerAdapter.Mess
             text_date = itemView.findViewById(R.id.item_text_date);
             text_sender = itemView.findViewById(R.id.item_text_sender);
             time_call = itemView.findViewById(R.id.item_text_call);
+
         }
     }
 }
