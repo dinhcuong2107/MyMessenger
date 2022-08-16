@@ -357,4 +357,20 @@ public class ProfileUserActivity extends AppCompatActivity {
 
         time_now = ""+time_send+ "   "+day_send;
     }
+    protected void set_status(String string){
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Users").child(key_user).child("status").setValue(string);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        set_status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        set_status("offline");
+    }
 }

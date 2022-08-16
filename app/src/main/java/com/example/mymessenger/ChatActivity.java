@@ -330,4 +330,20 @@ RecyclerView recyclerView;
         SimpleDateFormat timeFormatWithZone = new SimpleDateFormat("HH:mm:ss",Locale.getDefault());
         time_send = timeFormatWithZone.format(date);
     }
+    protected void set_status(String string){
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Users").child(key_user).child("status").setValue(string);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        set_status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        set_status("offline");
+    }
 }
