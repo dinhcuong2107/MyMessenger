@@ -40,6 +40,11 @@ SwipeRefreshLayout swipeRefreshLayout;
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private void load_list_chat() {
     }
 
