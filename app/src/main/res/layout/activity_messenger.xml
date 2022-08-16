@@ -15,9 +15,14 @@
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:background="@drawable/custom_edt_circle"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/frag_messenger_recyclerview"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_messenger"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"/>
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/frag_messenger_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
