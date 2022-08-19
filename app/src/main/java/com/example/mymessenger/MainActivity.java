@@ -100,19 +100,19 @@ String token="";
                         viewPager.setCurrentItem(0);
                         Intent intent0 = new Intent(MainActivity.this, MessengerActivity.class);
                         intent0.putExtra("key_user",key_user);
-                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
                         break;
                     case R.id.menu_contacts:
                         viewPager.setCurrentItem(1);
                         Intent intent1 = new Intent(MainActivity.this, ContactActivity.class);
                         intent1.putExtra("key_user",key_user);
-                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
                         break;
                     case R.id.menu_story:
                         viewPager.setCurrentItem(2);
                         Intent intent2 = new Intent(MainActivity.this, StoryActivity.class);
                         intent2.putExtra("key_user",key_user);
-                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
                         break;
                 }
                 return true;
@@ -211,21 +211,106 @@ String token="";
         ImageView menu_imageView = dialog.findViewById(R.id.menu_avt);
         TextView textView = dialog.findViewById(R.id.menu_fullname);
 
-        LinearLayout menu_back = dialog.findViewById(R.id.menu_back);
+        LinearLayout menu_profile = dialog.findViewById(R.id.menu_profile);
+        LinearLayout menu_group = dialog.findViewById(R.id.menu_group);
         LinearLayout menu_avatar = dialog.findViewById(R.id.menu_avatar);
         LinearLayout menu_wait = dialog.findViewById(R.id.menu_wait);
         LinearLayout menu_setting = dialog.findViewById(R.id.menu_setting);
         LinearLayout menu_logout = dialog.findViewById(R.id.menu_logout);
 
-        menu_back.setOnClickListener(new View.OnClickListener() {
+        menu_profile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                dialog.dismiss();
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.custom_dialog_dev);
+
+                Window window = dialog.getWindow();
+                if (window == null){return;}
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                WindowManager.LayoutParams win = window.getAttributes();
+                win.gravity = Gravity.CENTER;
+                window.setAttributes(win);
+                dialog.setCancelable(true);
+                dialog.show();
+            }
+        });
+        menu_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.custom_dialog_dev);
+
+                Window window = dialog.getWindow();
+                if (window == null){return;}
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                WindowManager.LayoutParams win = window.getAttributes();
+                win.gravity = Gravity.CENTER;
+                window.setAttributes(win);
+                dialog.setCancelable(true);
+                dialog.show();
+            }
+        });
+        menu_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.custom_dialog_dev);
+
+                Window window = dialog.getWindow();
+                if (window == null){return;}
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                WindowManager.LayoutParams win = window.getAttributes();
+                win.gravity = Gravity.CENTER;
+                window.setAttributes(win);
+                dialog.setCancelable(true);
+                dialog.show();
+            }
+        });
+        menu_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.custom_dialog_dev);
+
+                Window window = dialog.getWindow();
+                if (window == null){return;}
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                WindowManager.LayoutParams win = window.getAttributes();
+                win.gravity = Gravity.CENTER;
+                window.setAttributes(win);
+                dialog.setCancelable(true);
+                dialog.show();
             }
         });
         menu_wait.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.custom_dialog_dev);
+
+                Window window = dialog.getWindow();
+                if (window == null){return;}
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                WindowManager.LayoutParams win = window.getAttributes();
+                win.gravity = Gravity.CENTER;
+                window.setAttributes(win);
+                dialog.setCancelable(true);
+                dialog.show();
             }
         });
         menu_logout.setOnClickListener(new View.OnClickListener() {
