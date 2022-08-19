@@ -32,7 +32,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     List<Users> usersList;
     Context context;
     DatabaseReference databaseReference;
-    String time_now="",idchatzoom="";
+    String idchatzoom="",key_friend="",key_user="";
 
     public UsersAdapter(Context context) {
         this.context = context;
@@ -45,12 +45,66 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     @Override
     public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contact, parent, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Boolean[] check_friend = {false};
+                databaseReference = FirebaseDatabase.getInstance().getReference("Friends");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (final DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Friends friends = dataSnapshot.getValue(Friends.class);
+                            if (friends.id_user0.equals(key_user))
+                            {
+                                if (friends.id_user1.equals(key_friend))
+                                {
+                                    idchatzoom = dataSnapshot.getKey();
+                                    if (friends.stt_user0==true && friends.stt_user1==true)
+                                    {
+                                        check_friend[0] =true;
+                                    }
+                                }
+                            }else if (friends.id_user1.equals(key_user))
+                            {
+                                if (friends.id_user0.equals(key_friend))
+                                {
+                                    idchatzoom = dataSnapshot.getKey();
+                                    if (friends.stt_user0==true && friends.stt_user1==true){
+                                        check_friend[0] =true;
+                                    }
+                                }
+                            }
+                        }
+                        if (check_friend [0] ==  false)
+                        {
+                            Intent intent = new Intent(context, ProfileUserActivity.class);
+                            intent.putExtra("key_user",key_user);
+                            intent.putExtra("key_friend",key_friend);
+                            context.startActivities(new Intent[]{intent});
+                        }
+                        else {
+                            Intent intent = new Intent(context, ChatActivity.class);
+                            intent.putExtra("key_user",key_user);
+                            intent.putExtra("idchatzoom",idchatzoom);
+                            context.startActivities(new Intent[]{intent});
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+        });
         return new UsersViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
         Users users = usersList.get(position);
+        key_user = users.position;
+        key_friend = users.status;
         if (users==null)
         {
             return;
@@ -121,59 +175,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Boolean[] check_friend = {false};
-                databaseReference = FirebaseDatabase.getInstance().getReference("Friends");
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (final DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            Friends friends = dataSnapshot.getValue(Friends.class);
-                            if (friends.id_user0.equals(users.position))
-                            {
-                                if (friends.id_user1.equals(users.status))
-                                {
-                                    idchatzoom = dataSnapshot.getKey();
-                                    if (friends.stt_user0==true && friends.stt_user1==true)
-                                    {
-                                        check_friend[0] =true;
-                                    }
-                                }
-                            }else if (friends.id_user1.equals(users.position))
-                            {
-                                if (friends.id_user0.equals(users.status))
-                                {
-                                    idchatzoom = dataSnapshot.getKey();
-                                    if (friends.stt_user0==true && friends.stt_user1==true){
-                                        check_friend[0] =true;
-                                    }
-                                }
-                            }
-                        }
-                        if (check_friend [0] ==  false)
-                        {
-                            Intent intent = new Intent(context, ProfileUserActivity.class);
-                            intent.putExtra("key_user",users.position);
-                            intent.putExtra("key_friend",users.status);
-                            context.startActivities(new Intent[]{intent});
-                        }
-                        else {
-                            Intent intent = new Intent(context, ChatActivity.class);
-                            intent.putExtra("key_user",users.position);
-                            intent.putExtra("idchatzoom",idchatzoom);
-                            context.startActivities(new Intent[]{intent});
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
             }
         });
     }

@@ -303,7 +303,7 @@ public class ProfileUserActivity extends AppCompatActivity {
                     public void onComplete( DatabaseError error, @NonNull DatabaseReference ref) {
                         databaseReference = FirebaseDatabase.getInstance().getReference();
                         ChatRoom chatRoom = new ChatRoom();
-                        chatRoom.users = "" + key_user + key_friend;
+                        chatRoom.users = "" + key_user+ "/" + key_friend;
                         chatRoom.admin = "0";
                         chatRoom.avatar = "0";
                         chatRoom.status = "activity";

@@ -167,14 +167,11 @@ public class LoginActivity extends AppCompatActivity {
                                 if (login_token.equals(token)){
                                     Toast.makeText(LoginActivity.this,"đăng nhập thành công",Toast.LENGTH_LONG).show();
                                     startActivity(intent);
-                                    pass_login.setText("***");
                                     finish();
                                 }else {
                                     set_token(key_user,token);
                                     Toast.makeText(LoginActivity.this,"đăng nhập thành công",Toast.LENGTH_LONG).show();
                                     startActivity(intent);
-
-                                    pass_login.setText("***");
                                     finish();
                                 }
                             }

@@ -62,6 +62,7 @@ public class SplashActivity extends AppCompatActivity {
                                                 login_token = users.token;
                                                 intent = new Intent(SplashActivity.this,MainActivity.class);
                                                 intent.putExtra("key_user",key_user);
+                                                finish();
 
                                             }
                                         }
