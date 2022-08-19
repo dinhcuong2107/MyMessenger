@@ -362,15 +362,15 @@ public class ProfileUserActivity extends AppCompatActivity {
         databaseReference.child("Users").child(key_user).child("status").setValue(string);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        set_status("online");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        set_status("offline");
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        set_status("online");
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        set_status("offline");
+//    }
 }
