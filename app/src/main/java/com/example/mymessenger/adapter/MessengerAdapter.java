@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -150,7 +149,6 @@ public class MessengerAdapter extends RecyclerView.Adapter<MessengerAdapter.Mess
             @Override
             public void onClick(View v) {
                 // show ảnh
-                Toast.makeText(context,"show ảnh",Toast.LENGTH_LONG).show();
             }
         });
         holder.l_voice.setOnClickListener(new View.OnClickListener() {

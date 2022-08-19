@@ -100,16 +100,19 @@ String token="";
                         viewPager.setCurrentItem(0);
                         Intent intent0 = new Intent(MainActivity.this, MessengerActivity.class);
                         intent0.putExtra("key_user",key_user);
+                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
                         break;
                     case R.id.menu_contacts:
                         viewPager.setCurrentItem(1);
                         Intent intent1 = new Intent(MainActivity.this, ContactActivity.class);
                         intent1.putExtra("key_user",key_user);
+                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
                         break;
                     case R.id.menu_story:
                         viewPager.setCurrentItem(2);
                         Intent intent2 = new Intent(MainActivity.this, StoryActivity.class);
                         intent2.putExtra("key_user",key_user);
+                        Toast.makeText(MainActivity.this,""+item.getTitle(),Toast.LENGTH_LONG).show();
                         break;
                 }
                 return true;
@@ -269,15 +272,15 @@ String token="";
         databaseReference.child("Users").child(key_user).child("status").setValue(string);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        set_status("online");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        set_status("offline");
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        set_status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        set_status("offline");
+    }
 }
